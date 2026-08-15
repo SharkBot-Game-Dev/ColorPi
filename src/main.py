@@ -40,7 +40,7 @@ class ColorPi(commands.Bot):
     async def setup_hook(self):
         await load_cogs(self)
 
-        # await self.tree.sync()
+        await self.tree.sync()
 
 bot = ColorPi()
 

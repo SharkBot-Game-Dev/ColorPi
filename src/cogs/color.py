@@ -38,6 +38,25 @@ class ColorCog(commands.Cog):
 
         await asyncio.to_thread(image.close)
 
+    @app_commands.command(name="random", description="ランダム色から単色画像を作成します。")
+    async def random_command(self, interaction: discord.Interaction):
+        await interaction.response.defer()
+
+        def draw():
+            image = Image.new("RGB", (500, 300), (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
+
+            save = io.BytesIO()
+            image.save(save, "png")
+            save.seek(0)
+
+            return save
+
+        image = await asyncio.to_thread(draw)
+
+        await interaction.followup.send(file=discord.File(image, filename="color.png"), content="✅ 作成しました。")
+
+        await asyncio.to_thread(image.close)
+
     @app_commands.command(name="draw", description="このBotのアバターを描画します。")
     async def draw_command(self, interaction: discord.Interaction):
         await interaction.response.defer()
@@ -48,7 +67,7 @@ class ColorCog(commands.Cog):
 
         image = await asyncio.to_thread(drawAvatar.drawAvatar, red, green, blue)
 
-        await interaction.followup.send(file=discord.File(image, filename="color.png"), content="✅ 作成しました。")
+        await interaction.followup.send(file=discord.File(image, filename="color.png"), content="✅ 描画しました。")
 
         await asyncio.to_thread(image.close)
 
