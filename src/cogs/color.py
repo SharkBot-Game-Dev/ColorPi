@@ -14,6 +14,7 @@ class ColorCog(commands.Cog):
         print("Init -> ColorCog")
 
     @app_commands.command(name="color", description="色から単色画像を作成します。")
+    @app_commands.describe(color="16進数のrgbで指定")
     async def color_command(self, interaction: discord.Interaction, color: str):
         await interaction.response.defer()
 
