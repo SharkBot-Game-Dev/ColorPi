@@ -29,7 +29,7 @@ class ModerationCog(commands.Cog):
         try:
             deleted = await interaction.channel.purge(limit=count + 1, check=check)
 
-            await interaction.channel.send(content=f"✅️ メッセージを{len(deleted) + 1}個削除しました。\n-# このメッセージは10秒後に削除されます。", delete_after=10)
+            await interaction.channel.send(content=f"✅️ メッセージを{len(deleted) - 1}個削除しました。\n-# このメッセージは10秒後に削除されます。", delete_after=10)
         except:
             await interaction.user.send(content=f"❌ {interaction.channel.mention}にBotがアクセスできません。")
             return
