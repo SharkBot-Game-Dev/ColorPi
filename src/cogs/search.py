@@ -28,7 +28,7 @@ class SearchCog(commands.Cog):
         user = await interaction.client.fetch_user(user.id)
 
         if not user.banner:
-            await interaction.followup.send(embed=embed, content="❌ そのユーザーにはバナーが存在しません。")
+            await interaction.followup.send(content="❌ そのユーザーにはバナーが存在しません。")
             return
 
         embed = discord.Embed(color=discord.Color.random())
