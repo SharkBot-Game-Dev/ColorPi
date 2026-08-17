@@ -16,8 +16,10 @@ class GuidelineBuilder(discord.ui.Modal):
         if interaction.guild.icon:
             embed.set_thumbnail(url=interaction.guild.icon.url)
 
-        embed.set_footer(text=interaction.guild.name, icon_url=interaction.guild.icon.url if interaction.guild.icon else interaction.user.default_avatar.url)
-
+        embed.set_footer(
+            text="Discord コミュニティガイドライン も忘れないようにして下さい。"
+        )
+        
         view = discord.ui.View(timeout=None)
         view.add_item(discord.ui.Button(label="同意します", style=discord.ButtonStyle.success, custom_id=f"guideline_{self.role.id}"))
 
@@ -26,5 +28,3 @@ class GuidelineBuilder(discord.ui.Modal):
         except:
             await interaction.followup.send(content="❌ 送信に失敗しました。")
             return
-
-        await interaction.delete_original_response()

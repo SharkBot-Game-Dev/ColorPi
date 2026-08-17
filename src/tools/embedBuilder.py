@@ -27,5 +27,3 @@ class EmbedBuilder(discord.ui.Modal):
         except:
             await interaction.followup.send(content="❌ 送信に失敗しました。")
             return
-
-        await interaction.delete_original_response()
