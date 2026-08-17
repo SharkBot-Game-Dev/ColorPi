@@ -9,7 +9,7 @@ class PremiumCog(commands.Cog):
         self.bot = bot
         print("Init -> PremiumCog")
 
-    @app_commands.command(name="premium", description="プレミアム機能を入手します。")
+    @app_commands.command(name="premium", description="プレミアム機能を入手します。", extras={"category": "✨その他"})
     async def premium_command(self, interaction: discord.Interaction):
         await interaction.response.defer(ephemeral=True)
 
@@ -37,7 +37,7 @@ class PremiumCog(commands.Cog):
 ```
 """, view=discord.ui.View(timeout=None).add_item(discord.ui.Button(label="今すぐ加入する（月額500円）", url="https://www.sharkbot.xyz/membership/login")))
 
-    @app_commands.command(name="custom", description="[有料] Botのアバターを変更します。")
+    @app_commands.command(name="custom", description="[有料] Botのアバターを変更します。", extras={"category": "🎨カスタマイズ"})
     @app_commands.describe(avatar="不適切な画像のアップロードは禁止です。", banner="不適切な画像のアップロードは禁止です。", bio="自己紹介を指定できます。")
     @app_commands.allowed_installs(guilds=True, users=False)
     @app_commands.checks.has_permissions(manage_channels=True)

@@ -13,7 +13,7 @@ class ColorCog(commands.Cog):
         self.bot = bot
         print("Init -> ColorCog")
 
-    @app_commands.command(name="color", description="色から単色画像を作成します。")
+    @app_commands.command(name="color", description="色から単色画像を作成します。", extras={"category": "🖌️色"})
     @app_commands.describe(color="16進数のrgbで指定")
     async def color_command(self, interaction: discord.Interaction, color: str):
         await interaction.response.defer()
@@ -39,7 +39,7 @@ class ColorCog(commands.Cog):
 
         await asyncio.to_thread(image.close)
 
-    @app_commands.command(name="random", description="ランダム色から単色画像を作成します。")
+    @app_commands.command(name="random", description="ランダム色から単色画像を作成します。", extras={"category": "🖌️色"})
     async def random_command(self, interaction: discord.Interaction):
         await interaction.response.defer()
 
@@ -58,7 +58,7 @@ class ColorCog(commands.Cog):
 
         await asyncio.to_thread(image.close)
 
-    @app_commands.command(name="draw", description="このBotのアバターを描画します。")
+    @app_commands.command(name="draw", description="このBotのアバターを描画します。", extras={"category": "🖌️色"})
     async def draw_command(self, interaction: discord.Interaction):
         await interaction.response.defer()
 

@@ -7,7 +7,7 @@ class SearchCog(commands.Cog):
         self.bot = bot
         print("Init -> SearchCog")
 
-    @app_commands.command(name="avatar", description="指定したユーザーのアバターを表示します。")
+    @app_commands.command(name="avatar", description="指定したユーザーのアバターを表示します。", extras={"category": "✨その他"})
     @app_commands.describe(user="指定したユーザーのアバターを表示します。")
     async def avatar_command(self, interaction: discord.Interaction, user: discord.User = None):
         await interaction.response.defer()
@@ -19,7 +19,7 @@ class SearchCog(commands.Cog):
 
         await interaction.followup.send(embed=embed, content="✅ アバターを表示しました。")
 
-    @app_commands.command(name="banner", description="指定したユーザーのバナーを表示します。")
+    @app_commands.command(name="banner", description="指定したユーザーのバナーを表示します。", extras={"category": "✨その他"})
     @app_commands.describe(user="指定したユーザーのバナーを表示します。")
     async def banner_command(self, interaction: discord.Interaction, user: discord.User = None):
         await interaction.response.defer()
@@ -36,7 +36,7 @@ class SearchCog(commands.Cog):
 
         await interaction.followup.send(embed=embed, content="✅ バナーを表示しました。")
 
-    @app_commands.command(name="user", description="指定したユーザーの情報を表示します。")
+    @app_commands.command(name="user", description="指定したユーザーの情報を表示します。", extras={"category": "✨その他"})
     @app_commands.describe(user="指定したユーザーの情報を表示します。")
     async def user_command(self, interaction: discord.Interaction, user: discord.User = None):
         await interaction.response.defer()

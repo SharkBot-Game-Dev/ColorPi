@@ -9,7 +9,7 @@ class ModerationCog(commands.Cog):
         self.bot = bot
         print("Init -> ModerationCog")
 
-    @app_commands.command(name="clear", description="このチャンネルのメッセージを削除します。")
+    @app_commands.command(name="clear", description="このチャンネルのメッセージを削除します。", extras={"category": "🔨モデレーション"})
     @app_commands.describe(count="指定した分削除します。", user="指定したユーザーのメッセージを削除します。")
     @app_commands.allowed_installs(guilds=True, users=False)
     @app_commands.checks.has_permissions(manage_channels=True)

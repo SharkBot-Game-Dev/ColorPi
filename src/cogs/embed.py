@@ -9,7 +9,7 @@ class EmbedCog(commands.Cog):
         self.bot = bot
         print("Init -> EmbedCog")
 
-    @app_commands.command(name="embed", description="埋め込みを作成します。")
+    @app_commands.command(name="embed", description="埋め込みを作成します。", extras={"category": "✨その他"})
     @app_commands.allowed_installs(guilds=True, users=False)
     @app_commands.checks.has_permissions(manage_channels=True)
     async def embed_command(self, interaction: discord.Interaction):

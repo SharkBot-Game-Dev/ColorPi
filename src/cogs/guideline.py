@@ -9,7 +9,7 @@ class GuidelineCog(commands.Cog):
         self.bot = bot
         print("Init -> GuidelineCog")
 
-    @app_commands.command(name="guideline", description="サーバーのルールパネルを作成します。")
+    @app_commands.command(name="guideline", description="サーバーのルールパネルを作成します。", extras={"category": "😀ロール"})
     @app_commands.allowed_installs(guilds=True, users=False)
     @app_commands.describe(role="ルール同意後に付与するロール")
     @app_commands.checks.has_permissions(manage_roles=True)
