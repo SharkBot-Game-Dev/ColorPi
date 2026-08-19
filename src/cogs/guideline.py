@@ -42,9 +42,12 @@ class GuidelineCog(commands.Cog):
                                 "すでに同意しています。", ephemeral=True
                             )
 
-                        new_embed = interaction.message.embeds[0].copy()
-                        new_embed.color = discord.Color.random()
-                        await interaction.message.edit(embed=new_embed)
+                        try:
+                            new_embed = interaction.message.embeds[0].copy()
+                            new_embed.color = discord.Color.random()
+                            await interaction.message.edit(embed=new_embed)
+                        except:
+                            return
                     except discord.Forbidden:
                         await interaction.followup.send(
                             "付与したいロールの位置がColorPiのロールよりも\n上にあるため付与できませんでした。\nhttps://i.imgur.com/fGcWslT.gif",
