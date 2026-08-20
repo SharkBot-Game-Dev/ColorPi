@@ -42,6 +42,8 @@ class ColorPi(commands.Bot):
 
         await self.tree.sync()
 
+        await self.tree.sync(guild=discord.Object(1539202334238707822))
+
 bot = ColorPi()
 
 bot.run(os.environ.get('DISCORD_TOKEN'))
