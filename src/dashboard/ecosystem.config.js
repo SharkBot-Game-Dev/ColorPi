@@ -9,7 +9,7 @@ module.exports = {
       cwd: '/srv/samba/share/ColorPi/src/dashboard/current',
       env: {
         NODE_ENV: 'production',
-        PORT: 5050
+        PORT: 5000
       }
     }
   ]
