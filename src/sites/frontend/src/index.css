@@ -138,3 +138,8 @@ p {
   text-decoration: none;
   margin: 20px;
 }
+
+.serverBox {
+  background-color: var(--bg-menu);
+  border-radius: 20px;
+}

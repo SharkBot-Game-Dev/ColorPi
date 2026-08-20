@@ -1,10 +1,25 @@
 import avatarLogo from './assets/avatar.png'
 import './App.css'
+import { useEffect, useState } from 'react'
+import Settings from './Settings';
 
 function App() {
+  const [isOpenSetting, setIsOpenSetting] = useState(false);
+
+  function openSetting() {
+    setIsOpenSetting(true);
+  }
+
+  useEffect(() => {
+    const params = new URL(location.href).searchParams
+    if (params.get('login') == "true") {
+      setIsOpenSetting(true);
+    }
+  }, []);
+
   return (
     <>
-      <section id="center">
+      {isOpenSetting ? <Settings /> : <section id="center">
         <div>
           <img src={avatarLogo} width={100} height={100} />
 
@@ -16,6 +31,7 @@ function App() {
 
         <div className='inviteButton'>
           <a href='https://discord.com/oauth2/authorize?client_id=1537996178157871154'>Discordに追加</a>
+          <a onClick={openSetting}>ダッシュボード</a>
         </div><br/><br/>
 
         <div>
@@ -55,7 +71,7 @@ function App() {
           <h3>さあ、今すぐサーバーをアップグレードしよう！👇</h3><br/><br/>
           <a href='https://discord.com/oauth2/authorize?client_id=1537996178157871154'>今すぐ招待する</a>
         </div><br/><br/>
-      </section>
+      </section>}
     </>
   )
 }
