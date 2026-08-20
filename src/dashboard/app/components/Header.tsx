@@ -34,7 +34,7 @@ function Header() {
                 <img src="/avatar.png" className="h-[50px] w-[75px] pl-5" />
                 <h3 className="pl-5 pt-3">ColorPi</h3>
             </div>
-            <button className="my-5 text-right" onClick={openMenu}>☰</button>
+            <button className="my-5 text-right bg-[var(--bg-menu)] p-3 rounded-[30px]" onClick={openMenu}>☰</button>
         </header>
 
         {isMenuOpen ? <div className="absolute right-0 z-10 text-right" ref={menuRef}>
