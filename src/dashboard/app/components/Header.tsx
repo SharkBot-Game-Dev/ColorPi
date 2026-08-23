@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { SignIn } from './SignIn';
 
 function Header() {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -53,7 +54,8 @@ function Header() {
                 >
                     ホーム
                 </a><br/><br/>
-                <a href='https://discord.com/oauth2/authorize?client_id=1537996178157871154' className="m-5 text-[var(--text-menu)] no-underline">Discordに追加</a><br/><br/>
+                <a href='https://discord.com/oauth2/authorize?client_id=1537996178157871154' className="m-5 text-[var(--text-menu)] no-underline">Discordに追加</a><br/>
+                <SignIn />
                 <a href='https://discord.gg/w58JAwWn5n' className="m-5 text-[var(--text-menu)] no-underline">サポートサーバー</a><br/><br/>
                 <a href='https://www.sharkbot.xyz' className="m-5 text-[var(--text-menu)] no-underline">SharkBot</a>
             </div>
