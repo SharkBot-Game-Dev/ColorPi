@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { SignIn } from './SignIn';
 
+const isProduction = process.env.NODE_ENV === "production";
+
 function Header() {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -55,7 +57,7 @@ function Header() {
                     ホーム
                 </a><br/><br/>
                 <a href='https://discord.com/oauth2/authorize?client_id=1537996178157871154' className="m-5 text-[var(--text-menu)] no-underline">Discordに追加</a><br/>
-                <SignIn />
+                {!isProduction ? <SignIn /> : <br/>}
                 <a href='https://discord.gg/w58JAwWn5n' className="m-5 text-[var(--text-menu)] no-underline">サポートサーバー</a><br/><br/>
                 <a href='https://www.sharkbot.xyz' className="m-5 text-[var(--text-menu)] no-underline">SharkBot</a>
             </div>
