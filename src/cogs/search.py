@@ -11,7 +11,7 @@ class SearchCog(commands.Cog):
         self.bot = bot
         print("Init -> SearchCog")
 
-    @app_commands.command(name="avatar", description="指定したユーザーのアバターを表示します。", extras={"category": "✨その他"})
+    @app_commands.command(name="avatar", description="指定したユーザーのアバターを表示します。", extras={"category": "🔍検索と情報"})
     @app_commands.describe(user="指定したユーザーのアバターを表示します。")
     async def avatar_command(self, interaction: discord.Interaction, user: discord.User = None):
         await interaction.response.defer()
@@ -23,7 +23,7 @@ class SearchCog(commands.Cog):
 
         await interaction.followup.send(embed=embed, content="✅ アバターを表示しました。")
 
-    @app_commands.command(name="banner", description="指定したユーザーのバナーを表示します。", extras={"category": "✨その他"})
+    @app_commands.command(name="banner", description="指定したユーザーのバナーを表示します。", extras={"category": "🔍検索と情報"})
     @app_commands.describe(user="指定したユーザーのバナーを表示します。")
     async def banner_command(self, interaction: discord.Interaction, user: discord.User = None):
         await interaction.response.defer()
@@ -40,7 +40,7 @@ class SearchCog(commands.Cog):
 
         await interaction.followup.send(embed=embed, content="✅ バナーを表示しました。")
 
-    @app_commands.command(name="user", description="指定したユーザーの情報を表示します。", extras={"category": "✨その他"})
+    @app_commands.command(name="user", description="指定したユーザーの情報を表示します。", extras={"category": "🔍検索と情報"})
     @app_commands.describe(user="指定したユーザーの情報を表示します。")
     async def user_command(self, interaction: discord.Interaction, user: discord.User = None):
         await interaction.response.defer()
@@ -59,7 +59,7 @@ class SearchCog(commands.Cog):
 
         await interaction.followup.send(embed=embed, content=f"✅ {user.name}の情報を表示しました。")
 
-    @app_commands.command(name="server", description="サーバーの情報を表示します。", extras={"category": "✨その他"})
+    @app_commands.command(name="server", description="サーバーの情報を表示します。", extras={"category": "🔍検索と情報"})
     @app_commands.allowed_installs(guilds=True, users=False)
     async def server_command(self, interaction: discord.Interaction):
         await interaction.response.defer()
@@ -73,7 +73,7 @@ class SearchCog(commands.Cog):
 
         await interaction.followup.send(embed=embed, content=f"✅ {interaction.guild.name}の情報を表示しました。", allowed_mentions=discord.AllowedMentions.none())
 
-    @app_commands.command(name="role", description="ロールの情報を表示します。", extras={"category": "✨その他"})
+    @app_commands.command(name="role", description="ロールの情報を表示します。", extras={"category": "🔍検索と情報"})
     @app_commands.describe(role="指定したロールの情報を表示します。")
     @app_commands.allowed_installs(guilds=True, users=False)
     async def role_command(self, interaction: discord.Interaction, role: discord.Role):
