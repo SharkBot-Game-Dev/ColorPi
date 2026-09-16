@@ -101,7 +101,7 @@ class SearchCog(commands.Cog):
 
         image = await asyncio.to_thread(draw)
 
-        await interaction.followup.send(embed=embed, content=f"✅ {interaction.guild.name}の情報を表示しました。", allowed_mentions=discord.AllowedMentions.none(), file=discord.File(image, filename="role_color.png"))
+        await interaction.followup.send(embed=embed, content=f"✅ {role.mention}の情報を表示しました。", allowed_mentions=discord.AllowedMentions.none(), file=discord.File(image, filename="role_color.png"))
 
         image.close()
 
