@@ -20,7 +20,8 @@ class BadgeCog(commands.Cog):
         print("Ready.")
 
         async with aiohttp.ClientSession() as session:
-            await discord.Webhook.from_url(os.environ.get('STATUS_WEBHOOK'), session=session).send(content=f"✅起動しました。\n\n😆サーバー数: {len(self.bot.guilds)}")
+            webhook = discord.Webhook.from_url(os.environ.get('STATUS_WEBHOOK'), session=session)
+            await webhook.send(content=f"✅起動しました。", avatar_url=self.bot.user.avatar.url, username="ColorPi")
 
 async def setup(bot):
     await bot.add_cog(BadgeCog(bot))
