@@ -1,3 +1,7 @@
+import asyncio
+import io
+
+from PIL import Image
 from discord.ext import commands
 import discord
 from discord import app_commands
@@ -54,6 +58,52 @@ class SearchCog(commands.Cog):
             embed.add_field(name="🔖サーバータグ", value=str(user.primary_guild.tag), inline=False)
 
         await interaction.followup.send(embed=embed, content=f"✅ {user.name}の情報を表示しました。")
+
+    @app_commands.command(name="server", description="サーバーの情報を表示します。", extras={"category": "✨その他"})
+    @app_commands.allowed_installs(guilds=True, users=False)
+    async def server_command(self, interaction: discord.Interaction):
+        await interaction.response.defer()
+
+        embed = discord.Embed(color=discord.Color.random())
+        embed.set_thumbnail(url=interaction.guild.icon.url if interaction.guild.icon else None)
+
+        embed.add_field(name="✨サーバーid", value=str(interaction.guild.id), inline=False)
+        embed.add_field(name="📛サーバー名", value=str(interaction.guild.name), inline=False)
+        embed.add_field(name="⏰サーバー作成日", value=str(interaction.guild.created_at), inline=False)
+
+        await interaction.followup.send(embed=embed, content=f"✅ {interaction.guild.name}の情報を表示しました。", allowed_mentions=discord.AllowedMentions.none())
+
+    @app_commands.command(name="role", description="ロールの情報を表示します。", extras={"category": "✨その他"})
+    @app_commands.describe(role="指定したロールの情報を表示します。")
+    @app_commands.allowed_installs(guilds=True, users=False)
+    async def role_command(self, interaction: discord.Interaction, role: discord.Role):
+        await interaction.response.defer()
+
+        embed = discord.Embed(color=discord.Color.random())
+
+        embed.add_field(name="✨ロールid", value=str(role.id), inline=False)
+        embed.add_field(name="📛ロール名", value=str(role.name), inline=False)
+        embed.add_field(name="⏰ロール作成日", value=str(role.created_at), inline=False)
+        hex_code = f"#{role.color.value:06x}"
+        embed.add_field(name="🎨ロールの色", value=str(hex_code), inline=False)
+
+        embed.set_image(url="attachment://role_color.png")
+
+        def draw():
+
+            image = Image.new("RGBA", (300, 150), hex_code)
+
+            save = io.BytesIO()
+            image.save(save, "png")
+            save.seek(0)
+
+            return save
+
+        image = await asyncio.to_thread(draw)
+
+        await interaction.followup.send(embed=embed, content=f"✅ {interaction.guild.name}の情報を表示しました。", allowed_mentions=discord.AllowedMentions.none(), file=discord.File(image, filename="role_color.png"))
+
+        image.close()
 
 async def setup(bot):
     await bot.add_cog(SearchCog(bot))

@@ -14,8 +14,9 @@ class OmikujiCog(commands.Cog):
         await interaction.response.defer()
 
         kuji = random.choice(["大吉", "中吉", "吉", "小吉", "末吉", "凶", "大凶"])
-
-        await interaction.followup.send(content=f"🥠 {kuji}")
+        color = random.choice(["❤️赤", "💙青", "🟢緑", "🟡黃", "🟪紫", "🤍白", "⚫黒", "🟤茶"])
+        
+        await interaction.followup.send(content=f"✅おみくじを引きしました。", embed=discord.Embed(color=discord.Color.random(), description=f"🥠引いたくじ: {kuji}\n🎨ラッキーカラー: {color}"))
 
 async def setup(bot):
     await bot.add_cog(OmikujiCog(bot))

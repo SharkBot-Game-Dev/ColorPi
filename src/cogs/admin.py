@@ -50,7 +50,7 @@ class AdminCog(commands.Cog):
         else:
             await self.bot.tree.sync(guild=discord.Object(int(guild_id)))
 
-        text = 'グローバルに' if guild_id else f'`{guild_id}`に'
+        text = f'`{guild_id}`に' if guild_id else 'グローバルに'
         await interaction.followup.send(content=f"✅ {text}同期しました。")
 
 async def setup(bot):
