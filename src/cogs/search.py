@@ -105,5 +105,21 @@ class SearchCog(commands.Cog):
 
         image.close()
 
+    @app_commands.command(name="rolecount", description="ロール一覧とメンバー数を表示します。", extras={"category": "🔍検索と情報"})
+    @app_commands.describe(role="指定したロールの情報を表示します。")
+    @app_commands.allowed_installs(guilds=True, users=False)
+    async def rolecount_command(self, interaction: discord.Interaction, role: discord.Role):
+        await interaction.response.defer()
+
+        roles = await interaction.guild.role_member_counts()
+        rolescount = len(interaction.guild.roles)
+        
+        text = ""
+        for role, count in roles.items():
+            text += f"<@&{role.id}> .. {count}人\n"
+        embed = discord.Embed(color=discord.Color.random(), description=text)
+
+        await interaction.followup.send(embed=embed, content=f"✅ {rolescount}個のロールを表示しました。", allowed_mentions=discord.AllowedMentions.none())
+
 async def setup(bot):
     await bot.add_cog(SearchCog(bot))
