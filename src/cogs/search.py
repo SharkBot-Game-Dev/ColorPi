@@ -108,7 +108,7 @@ class SearchCog(commands.Cog):
     @app_commands.command(name="rolecount", description="ロール一覧とメンバー数を表示します。", extras={"category": "🔍検索と情報"})
     @app_commands.describe(role="指定したロールの情報を表示します。")
     @app_commands.allowed_installs(guilds=True, users=False)
-    async def rolecount_command(self, interaction: discord.Interaction, role: discord.Role):
+    async def rolecount_command(self, interaction: discord.Interaction):
         await interaction.response.defer()
 
         roles = await interaction.guild.role_member_counts()
