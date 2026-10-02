@@ -32,69 +32,23 @@ export default function Home() {
             "
           >ColorPi🎨</h1>
           <p>
-            初心者におすすめの多機能Bot
-          </p><br/><br/>
-        </div>
+            私たちは、様々な製品を作っています。
+          </p><br/>
 
-        <a
-          href="#"
-          className="
-            rounded-[50px]
-            bg-[var(--button-bg)]
-            p-5
-            text-[var(--button-text)]
-            no-underline
-          "
-        >
-          招待する
-        </a>
-        <br/><br/>
+          <br/>
 
-        <div className="bg-[var(--bg-menu)] p-5 rounded-xl m-5">
-          <h3 className="m-5 text-xl">便利なコマンド😽</h3>
-          <p>サーバーを便利にする楽しいコマンドがいっぱい！</p>
-          <ul>
-            <li>/user 😺ユーザー情報を表示できる</li>
-            <li>/avatar 😆好きな人のアバターを表示</li>
-            <li>/clear 🧹スパムメッセージを一気に削除</li>
-          </ul>
-        </div>
-
-        <div className="bg-[var(--bg-menu)] p-5 rounded-xl m-5">
-         <h3 className="m-5 text-xl">ロールパネル😆</h3>
-          <p>ロールをつけたり外したりできる機能があるよ！</p>
-          <ul>
-            <li>/panel 😆ロールパネルを作成</li>
-            <li>/guideline ✅ルールに同意できるパネルが作れる</li>
-          </ul>
-        </div>
-
-        <div className="bg-[var(--bg-menu)] p-5 rounded-xl m-5">
-          <h3 className="m-5 text-xl">いろんな色コマンド🎨</h3>
-          <p>色を表示したり、かわいいBotのアバターを作成したり..！</p>
-          <ul>
-            <li>/draw 🎨Botのアバター風画像を作成</li>
-            <li>/color 🖌️色を表示できる</li>
-          </ul>
-        </div>
-
-        <div className="bg-[var(--bg-menu)] p-5 rounded-xl m-5">
-          <h3 className="m-5 text-xl">機能はほとんどが無料！💰</h3>
-          <p>ほとんどの機能が無料で使用できます。</p>
-        </div>
-
-        <div className="p-5 m-5">
-          <h3 className="m-5 text-xl">さあ、今すぐサーバーをアップグレードしよう！👇</h3><br/>
-          <a
-            className="
-              rounded-[50px]
-              bg-[var(--button-bg)]
-              p-5
-              text-[var(--button-text)]
-              no-underline
-            " 
-            href='https://discord.com/oauth2/authorize?client_id=1537996178157871154'
-          >今すぐ招待する</a>
+          <h2 className="text-[26px] font-medium">製品とサービス</h2><br/>
+          <div className="m-5">
+            <div className="p-1 bg-[var(--bg-menu)] text-center rounded-lg p-5">
+              <a href="/products/bot">
+                <h3>多機能Bot (ColorPi)</h3>
+                <p className="text-white">
+                  初心者におすすめの多機能Botです。<br/><br/>
+                  👉️ 移動するにはクリック 👈️
+                </p>
+              </a>
+            </div>
+          </div>
         </div>
       </section>
     </ center>

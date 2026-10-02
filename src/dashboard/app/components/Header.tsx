@@ -33,10 +33,10 @@ function Header() {
   return (
     <div>
         <header className="flex justify-between pt-5 pr-5 text-left">
-            <div className="flex pt-5 text-left">
+            <a href="/"><div className="flex pt-5 text-left">
                 <img src="/avatar.png" className="h-[50px] w-[75px] pl-5" />
                 <h3 className="pl-5 pt-3">ColorPi</h3>
-            </div>
+            </div></a>
             <button className="my-5 text-right bg-[var(--bg-menu)] p-3 rounded-[30px]" onClick={openMenu}>☰</button>
         </header>
 
