@@ -28,6 +28,13 @@ function Bottom() {
                     </p>
                 </div>
                 <div className="p-1 text-white text-center">
+                    <h3 className="pt-3">利用規約など</h3><hr/>
+                    <p>
+                        <a href="/terms/bot">利用規約（多機能Bot）</a><br/>
+                        <a href="/privacy/bot">プライバシーポリシー（多機能Bot）</a>
+                    </p>
+                </div>
+                <div className="p-1 text-white text-center">
                     <h3 className="pt-3">SNSなど</h3><hr/>
                     <p>
                         <a href="https://github.com/ColorPi-Dev">Github</a>
