@@ -341,11 +341,11 @@ class SlotCog(commands.Cog):
                 balance = user.coin
 
         embed = discord.Embed(
-            title="💰 所持コイン",
             description=f"**{balance:,} コイン**",
-            color=discord.Color.gold(),
+            color=discord.Color.random(),
         )
         await interaction.followup.send(
+            content="✅️ 所持コインを表示しました。",
             embed=embed,
         )
 
