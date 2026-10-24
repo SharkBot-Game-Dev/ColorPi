@@ -74,9 +74,9 @@ class HelpCog(commands.Cog):
                         text_display = discord.ui.TextDisplay(content=f"### {clean_key}\n{cmd_texts[0]}")
                     self.container.add_item(text_display)
 
-                backbutton = discord.ui.Button(emoji="👈️")
+                backbutton = discord.ui.Button(emoji="⬅️")
                 backbutton.callback = self.back_button
-                nextbutton = discord.ui.Button(emoji="👉")
+                nextbutton = discord.ui.Button(emoji="➡️")
                 nextbutton.callback = self.next_button
                 self.container.add_item(discord.ui.ActionRow(backbutton, nextbutton))
 
