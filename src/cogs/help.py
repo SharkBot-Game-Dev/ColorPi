@@ -60,25 +60,27 @@ class HelpCog(commands.Cog):
                 if interaction.user.id != interaction_button.user.id:
                     await interaction.response.send_message(content="❌️ これはあなたのボタンではありません。")
                     return
+                await interaction.response.defer(ephemeral=True)
                 if self.page > 0:
                     self.page -= 1
-                self.build_help_container(self.page)
+                self.build_help_container()
                 await interaction_button.message.edit(view=self)
 
             async def next_button(self, interaction_button: discord.Interaction):
                 if interaction.user.id != interaction_button.user.id:
                     await interaction.response.send_message(content="❌️ これはあなたのボタンではありません。")
                     return
+                await interaction.response.defer(ephemeral=True)
                 if self.page < total_pages - 1:
                     self.page += 1
-                self.build_help_container(self.page)
+                self.build_help_container()
                 await interaction_button.message.edit(view=self)
 
-            def build_help_container(self, page: int):
+            def build_help_container(self):
                 self.container.clear_items()
 
                 for page in pages:
-                    if page["page"] != page:
+                    if page["page"] != self.page:
                         continue
                     cat_name = page["category"]
                     cmds = page["commands"]
