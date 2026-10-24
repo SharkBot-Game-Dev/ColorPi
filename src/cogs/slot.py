@@ -366,7 +366,7 @@ class SlotCog(commands.Cog):
         user: discord.User,
         coin: int
     ):
-        await interaction.response.defer(ephemeral=True)
+        await interaction.response.defer()
         if coin > 50000:
             await interaction.followup.send(content="❌ 一度に**50000コイン**まで与えることができます。")
             return
