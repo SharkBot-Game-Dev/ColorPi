@@ -312,16 +312,22 @@ class SlotCog(commands.Cog):
     )
     @app_commands.guild_only()
     @app_commands.allowed_installs(guilds=True, users=False)
+    @app_commands.describe(
+        user="指定しない場合は自分が指定されます"
+    )
     async def balance(
         self,
         interaction: discord.Interaction,
+        user: discord.User = None
     ):
-        await interaction.response.defer(ephemeral=True)
+        if not user:
+            user = interaction.user
+        
+        await interaction.response.defer()
 
         if interaction.guild_id is None:
             await interaction.followup.send(
                 "❌ サーバー内で実行してください。",
-                ephemeral=True,
             )
             return
 
@@ -329,7 +335,7 @@ class SlotCog(commands.Cog):
             async with session.begin():
                 user = await self.get_or_create_user(
                     session,
-                    str(interaction.user.id),
+                    str(user.id),
                     str(interaction.guild_id),
                 )
                 balance = user.coin
@@ -341,7 +347,6 @@ class SlotCog(commands.Cog):
         )
         await interaction.followup.send(
             embed=embed,
-            ephemeral=True,
         )
 
 
