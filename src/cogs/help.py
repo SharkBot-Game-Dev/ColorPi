@@ -36,7 +36,7 @@ class HelpCog(commands.Cog):
             })
             command_count += 1
 
-        print(pages)
+        # print(pages)
 
         if not pages:
             await interaction.followup.send("表示できるコマンドがありません。")
@@ -59,7 +59,7 @@ class HelpCog(commands.Cog):
                 if interaction.user.id != interaction_button.user.id:
                     await interaction.response.send_message(content="❌️ これはあなたのボタンではありません。")
                     return
-                await interaction.response.defer(ephemeral=True)
+                await interaction_button.response.defer(ephemeral=True)
                 if self.page > 0:
                     self.page -= 1
                 self.build_help_container()
@@ -69,7 +69,7 @@ class HelpCog(commands.Cog):
                 if interaction.user.id != interaction_button.user.id:
                     await interaction.response.send_message(content="❌️ これはあなたのボタンではありません。")
                     return
-                await interaction.response.defer(ephemeral=True)
+                await interaction_button.response.defer(ephemeral=True)
                 if self.page < total_pages - 1:
                     self.page += 1
                 self.build_help_container()
