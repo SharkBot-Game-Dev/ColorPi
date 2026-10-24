@@ -62,6 +62,8 @@ class HelpCog(commands.Cog):
                 await interaction_button.response.defer(ephemeral=True)
                 if self.page > 0:
                     self.page -= 1
+                else:
+                    self.page = total_pages - 1
                 self.build_help_container()
                 await interaction_button.message.edit(view=self)
 
@@ -72,6 +74,8 @@ class HelpCog(commands.Cog):
                 await interaction_button.response.defer(ephemeral=True)
                 if self.page < total_pages - 1:
                     self.page += 1
+                else:
+                    self.page = 0
                 self.build_help_container()
                 await interaction_button.message.edit(view=self)
 
