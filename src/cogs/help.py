@@ -34,6 +34,7 @@ class HelpCog(commands.Cog):
                 "commands": cmds,
                 "page": command_page
             })
+            command_count += 1
 
         print(pages)
 
