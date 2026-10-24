@@ -22,13 +22,18 @@ class HelpCog(commands.Cog):
 
         pages = []
         COMMANDS_PER_PAGE = 4
+        command_page = 0
+        command_count = 0
 
         for cat_name, cmds in category_map.items():
-            for i in range(0, len(cmds), COMMANDS_PER_PAGE):
-                pages.append({
-                    "category": cat_name,
-                    "commands": cmds[i:i + COMMANDS_PER_PAGE]
-                })
+            if command_count > COMMANDS_PER_PAGE:
+                command_page += 1
+                command_count = 0
+            pages.append({
+                "category": cat_name,
+                "commands": cmds,
+                "page": command_page
+            })
 
         if not pages:
             await interaction.followup.send("表示できるコマンドがありません。")
@@ -52,8 +57,8 @@ class HelpCog(commands.Cog):
                 if interaction.user.id != interaction_button.user.id:
                     await interaction.response.send_message(content="❌️ これはあなたのボタンではありません。")
                     return
-                if self.current_page > 0:
-                    self.current_page -= 1
+                if self.page > 0:
+                    self.page -= 1
                 self.build_help_container(self.page)
                 await interaction_button.message.edit(view=self)
 
@@ -61,23 +66,24 @@ class HelpCog(commands.Cog):
                 if interaction.user.id != interaction_button.user.id:
                     await interaction.response.send_message(content="❌️ これはあなたのボタンではありません。")
                     return
-                if self.current_page < total_pages - 1:
-                    self.current_page += 1
+                if self.page < total_pages - 1:
+                    self.page += 1
                 self.build_help_container(self.page)
                 await interaction_button.message.edit(view=self)
 
             def build_help_container(self, page: int):
                 self.container.clear_items()
 
-                page_data = pages[page]
-                cat_name = page_data["category"]
-                cmds = page_data["commands"]
+                for page in pages:
+                    if page["page"] != page:
+                        continue
+                    cat_name = page["category"]
+                    cmds = page["commands"]
 
-                cmd_list_str = "\n".join([f"`/{cmd.name}` - {cmd.description}" for cmd in cmds])
+                    cmd_list_str = "\n".join([f"`/{cmd.name}` - {cmd.description}" for cmd in cmds])
 
-                text_display = discord.ui.TextDisplay(content=f"## {cat_name}\n" + cmd_list_str)
-
-                self.container.add_item(text_display)
+                    text_display = discord.ui.TextDisplay(content=f"## {cat_name}\n" + cmd_list_str)
+                    self.container.add_item(text_display)
 
                 backbutton = discord.ui.Button(label="⬅️")
                 backbutton.callback = self.back_button
