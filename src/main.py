@@ -11,7 +11,7 @@ dotenv.load_dotenv()
 intents = discord.Intents.none()
 intents.guilds = True
 
-async def load_cogs(bot: commands.Bot, base_folder="cogs"):
+async def load_cogs(bot: commands.AutoShardedBot, base_folder="cogs"):
     tasks = []
 
     for root, _, files in os.walk(base_folder):
@@ -40,9 +40,9 @@ class ColorPi(commands.Bot):
     async def setup_hook(self):
         await load_cogs(self)
 
-        await self.tree.sync()
+        # await self.tree.sync()
 
-        await self.tree.sync(guild=discord.Object(1539202334238707822))
+        # await self.tree.sync(guild=discord.Object(1539202334238707822))
 
 bot = ColorPi()
 
