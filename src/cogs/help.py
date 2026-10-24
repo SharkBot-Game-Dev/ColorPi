@@ -42,7 +42,7 @@ class HelpCog(commands.Cog):
             await interaction.followup.send("表示できるコマンドがありません。")
             return
 
-        total_pages = len(pages)
+        total_pages = pages[-1]["page"]
 
         class HelpView(discord.ui.LayoutView):
             def __init__(self, *, timeout = 180):
@@ -80,7 +80,7 @@ class HelpCog(commands.Cog):
                 await interaction_button.message.edit(view=self)
 
             def build_help_container(self):
-                print(self.page)
+                print
 
                 self.container.clear_items()
 
