@@ -27,6 +27,8 @@ class HelpCog(commands.Cog):
             else:
                 commands_catrgory[category + f"_{page_category}"] = [command]
             page_count += 1
+            print(page_count)
+            print(page_category)
 
         class HelpView(discord.ui.LayoutView):
             def __init__(self, *, timeout = 180):
