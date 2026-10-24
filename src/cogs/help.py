@@ -80,6 +80,8 @@ class HelpCog(commands.Cog):
                 await interaction_button.message.edit(view=self)
 
             def build_help_container(self):
+                print(self.page)
+
                 self.container.clear_items()
 
                 for page in pages:
