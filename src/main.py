@@ -8,6 +8,8 @@ import os
 
 dotenv.load_dotenv()
 
+from tools.database import Base, engine
+
 intents = discord.Intents.none()
 intents.guilds = True
 
@@ -38,6 +40,9 @@ class ColorPi(commands.Bot):
         super().__init__("!", help_command=None, intents=intents)
 
     async def setup_hook(self):
+        async with engine.begin() as conn:
+            await conn.run_sync(Base.metadata.create_all)
+
         await load_cogs(self)
 
         # await self.tree.sync()
