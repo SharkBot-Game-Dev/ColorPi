@@ -42,7 +42,7 @@ class HelpCog(commands.Cog):
             await interaction.followup.send("表示できるコマンドがありません。")
             return
 
-        total_pages = pages[-1]["page"]
+        total_pages = pages[-1]["page"] + 1
 
         class HelpView(discord.ui.LayoutView):
             def __init__(self, *, timeout = 180):
