@@ -48,9 +48,8 @@ class HelpCog(commands.Cog):
             def __init__(self, *, timeout = 180):
                 super().__init__(timeout=timeout)
 
-                self.build_help_container()
-
                 self.page = 0
+                self.build_help_container()
 
             res_text = discord.ui.TextDisplay(f"✅ Botのコマンドを表示しました。")
 
