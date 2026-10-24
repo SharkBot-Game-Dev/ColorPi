@@ -40,10 +40,10 @@ class ColorPi(commands.Bot):
         super().__init__("!", help_command=None, intents=intents)
 
     async def setup_hook(self):
+        await load_cogs(self)
+
         async with engine.begin() as conn:
             await conn.run_sync(Base.metadata.create_all)
-
-        await load_cogs(self)
 
         # await self.tree.sync()
 
