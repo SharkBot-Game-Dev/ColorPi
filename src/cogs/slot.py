@@ -349,6 +349,39 @@ class SlotCog(commands.Cog):
             embed=embed,
         )
 
+    @app_commands.command(
+        name="give",
+        description="ユーザーにコインを与えます。",
+        extras={"category": "🎰スロット"},
+    )
+    @app_commands.guild_only()
+    @app_commands.allowed_installs(guilds=True, users=False)
+    @app_commands.describe(
+        user="コインを与えるユーザー", coin="与えるコイン"
+    )
+    @app_commands.checks.has_permissions(manage_guild=True)
+    async def give(
+        self,
+        interaction: discord.Interaction,
+        user: discord.User,
+        coin: int
+    ):
+        await interaction.response.defer(ephemeral=True)
+        if coin > 50000:
+            await interaction.followup.send(content="❌ 一度に**50000コイン**まで与えることができます。")
+            return
+        if coin < 1:
+            await interaction.followup.send(content="❌ **1コイン**以上与える必要があります。")
+            return
+        
+        async with SessionLocal() as session:
+            async with session.begin():
+                economy_user = await self.get_or_create_user(
+                    session, str(user.id), str(interaction.guild_id)
+                )
+                economy_user.coin += coin
+
+                await interaction.followup.send(embed=discord.Embed(color=discord.Color.random(), description=f"{user.mention} に与えました。"), content=f"✅️ **{coin}コイン**を与えました。")
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(SlotCog(bot))
