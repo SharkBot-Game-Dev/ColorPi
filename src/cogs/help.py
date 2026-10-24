@@ -13,22 +13,28 @@ class HelpCog(commands.Cog):
     async def help_command(self, interaction: discord.Interaction):
         await interaction.response.defer()
 
-        commands_catrgory = {}
-        page_count = 0
-        page_category = 0
-        
+        category_map = {}
         for command in self.bot.tree.get_commands(type=discord.AppCommandType.chat_input):
-            if page_count > 3:
-                page_count = 0
-                page_category += 1
-            category = command.extras.get('category', '✨その他')
-            if isinstance(commands_catrgory.get(category), list):
-                commands_catrgory[category + f"_{page_category}"].append(command)
-            else:
-                commands_catrgory[category + f"_{page_category}"] = [command]
-            page_count += 1
-            print(page_count)
-            print(page_category)
+            cat = command.extras.get('category', '✨その他')
+            if cat not in category_map:
+                category_map[cat] = []
+            category_map[cat].append(command)
+
+        pages = []
+        COMMANDS_PER_PAGE = 4
+
+        for cat_name, cmds in category_map.items():
+            for i in range(0, len(cmds), COMMANDS_PER_PAGE):
+                pages.append({
+                    "category": cat_name,
+                    "commands": cmds[i:i + COMMANDS_PER_PAGE]
+                })
+
+        if not pages:
+            await interaction.followup.send("表示できるコマンドがありません。")
+            return
+
+        total_pages = len(pages)
 
         class HelpView(discord.ui.LayoutView):
             def __init__(self, *, timeout = 180):
@@ -38,7 +44,7 @@ class HelpCog(commands.Cog):
 
                 self.page = 0
 
-            res_text = discord.ui.TextDisplay(f"✅ Botのコマンドを表示しました。 {page_count} {page_category}")
+            res_text = discord.ui.TextDisplay(f"✅ Botのコマンドを表示しました。")
 
             container = discord.ui.Container(accent_color=discord.Color.random())
 
@@ -46,8 +52,8 @@ class HelpCog(commands.Cog):
                 if interaction.user.id != interaction_button.user.id:
                     await interaction.response.send_message(content="❌️ これはあなたのボタンではありません。")
                     return
-                if self.page < page_category:
-                    self.page = page_category
+                if self.current_page > 0:
+                    self.current_page -= 1
                 self.build_help_container(self.page)
                 await interaction_button.message.edit(view=self)
 
@@ -55,26 +61,23 @@ class HelpCog(commands.Cog):
                 if interaction.user.id != interaction_button.user.id:
                     await interaction.response.send_message(content="❌️ これはあなたのボタンではありません。")
                     return
-                if self.page > page_category:
-                    self.page = 0
+                if self.current_page < total_pages - 1:
+                    self.current_page += 1
                 self.build_help_container(self.page)
                 await interaction_button.message.edit(view=self)
 
             def build_help_container(self, page: int):
                 self.container.clear_items()
 
-                for key, value in commands_catrgory.items():
-                    if not key.endswith(f"_{page}"):
-                        continue
+                page_data = pages[page]
+                cat_name = page_data["category"]
+                cmds = page_data["commands"]
 
-                    clean_key = key.split("_")[0]
+                cmd_list_str = "\n".join([f"`/{cmd.name}` - {cmd.description}" for cmd in cmds])
 
-                    cmd_texts = [f"`{cmd.name}`" + f" ({cmd.description})" for cmd in value]
-                    if len(cmd_texts) != 1:
-                        text_display = discord.ui.TextDisplay(content=f"### {clean_key}\n" + "\n".join(cmd_texts))
-                    else:
-                        text_display = discord.ui.TextDisplay(content=f"### {clean_key}\n{cmd_texts[0]}")
-                    self.container.add_item(text_display)
+                text_display = discord.ui.TextDisplay(content=f"## {cat_name}\n" + cmd_list_str)
+
+                self.container.add_item(text_display)
 
                 backbutton = discord.ui.Button(label="⬅️")
                 backbutton.callback = self.back_button
