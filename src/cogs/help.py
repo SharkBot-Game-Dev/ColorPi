@@ -35,6 +35,8 @@ class HelpCog(commands.Cog):
                 "page": command_page
             })
 
+        print(pages)
+
         if not pages:
             await interaction.followup.send("表示できるコマンドがありません。")
             return
