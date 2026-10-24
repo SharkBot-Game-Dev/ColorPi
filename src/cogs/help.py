@@ -36,7 +36,7 @@ class HelpCog(commands.Cog):
 
                 self.page = 0
 
-            res_text = discord.TextDisplay("✅ Botのコマンドを表示しました。")
+            res_text = discord.ui.TextDisplay("✅ Botのコマンドを表示しました。")
 
             container = discord.ui.Container(accent_color=discord.Color.random())
 
