@@ -1,0 +1,44 @@
+name: Sharkbot
+services:
+  bot:
+    build: ./src/bot
+    env_file:
+      - ./src/bot/.env
+    networks:
+      - colorpi_network
+    environment:
+      RESOURCE_API_BASE_URL: "http://api:8080"
+  dashboard:
+    build:
+      context: ./src/dashboard
+      dockerfile: Dockerfile
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - colorpi_network
+    environment:
+      DATABASE_URL: "postgresql://sharkbot:password@postgres:5432/postgres"
+      NEXT_PUBLIC_API_URL: http://api:8080
+    ports:
+      - "3000:3000"
+  postgres:
+    image: postgres:18
+    environment:
+      POSTGRES_USER: sharkbot
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: sharkbot
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    networks:
+      - colorpi_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sharkbot"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+volumes:
+  postgres_data:
+networks:
+  colorpi_network:
+    driver: bridge
