@@ -6,8 +6,6 @@ services:
       - ./src/bot/.env
     networks:
       - colorpi_network
-    environment:
-      RESOURCE_API_BASE_URL: "http://api:8080"
   dashboard:
     build:
       context: ./src/dashboard
@@ -19,7 +17,6 @@ services:
       - colorpi_network
     environment:
       DATABASE_URL: "postgresql://sharkbot:password@postgres:5432/postgres"
-      NEXT_PUBLIC_API_URL: http://api:8080
     ports:
       - "3000:3000"
   postgres:
