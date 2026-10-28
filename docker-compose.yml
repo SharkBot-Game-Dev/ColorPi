@@ -1,4 +1,4 @@
-name: Sharkbot
+name: ColorPi
 services:
   bot:
     build: ./src/bot
