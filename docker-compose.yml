@@ -6,6 +6,7 @@ services:
       - ./src/bot/.env
     networks:
       - colorpi_network
+    restart: always
   dashboard:
     build:
       context: ./src/dashboard
@@ -19,6 +20,7 @@ services:
       DATABASE_URL: "postgresql://sharkbot:password@postgres:5432/postgres"
     ports:
       - "3000:3000"
+    restart: always
   postgres:
     image: postgres:18
     environment:
@@ -34,6 +36,7 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    restart: always
 volumes:
   postgres_data:
 networks:
